@@ -9,6 +9,8 @@
 ## Text Processing & Visualization
 - [ ] Create a profanity filter function
 
+## Text Processing & Visualization
+
 ## ML Prediction Algorithms
 
 ## Deployment with Shiny
