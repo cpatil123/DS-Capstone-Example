@@ -6,7 +6,7 @@ library(quanteda)
 library(SnowballC)
 
 ### Set working directory (Windows OS)
-setwd("C://Users//Yanal Kashou//Data Science//Projects//R//DataScienceCapstone//Coursera-Swiftkey//final//en_US")
+setwd("C://Users//Yanal Kashou//Data Science//Projects//R//DataScienceCapstone//data")
 
 # Tokenization
 ## From file to tokenized file [Identify words, punctuation and numbers]
@@ -37,6 +37,8 @@ NewsCorpus <- Corpus(VectorSource(RawNewsText))
 TwitterDocTermMatrix <- DocumentTermMatrix(TwitterCorpus) 
 BlogsDocTermMatrix <- DocumentTermMatrix(BlogsCorpus)
 NewsDocTermMatrix <- DocumentTermMatrix(NewsCorpus)
+
+inspect(TwitterDocTermMatrix)
 
 # Profanity Filtering 
 ##[Remove unwanted words]
