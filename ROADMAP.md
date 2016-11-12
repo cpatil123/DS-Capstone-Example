@@ -6,9 +6,9 @@
 - [ ] Instantiate DocumentTermMatrix on each corpus
 
 ## Exploratory analysis
-- [ ] Length of data
-- [ ] Size of data
-- [ ] Largest element of data (Longest line)
+- [x] Length of data
+- [x] Size of data
+- [x] Largest element of data (Longest line)
 
 ## Text Processing & Visualization
 - [ ] Convert all words to lowercase

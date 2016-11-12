@@ -40,5 +40,7 @@ NewsDocTermMatrix <- DocumentTermMatrix(NewsCorpus)
 
 inspect(TwitterDocTermMatrix)
 
+
+
 # Profanity Filtering 
 ##[Remove unwanted words]
