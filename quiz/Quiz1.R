@@ -42,9 +42,8 @@ love/hate
 # 4.1
 
 # Question 5
-con1 <- file("en_US.twitter.txt", "r")
-RawTwitterText <- readLines(con1)
-grep("biostats", RawTwitterText)
+TweetNumber <- grep("biostats", RawTwitterText)
+RawTwitterText[TweetNumber]
 
 # Answer:
 # They haven't studied for their biostats exam
