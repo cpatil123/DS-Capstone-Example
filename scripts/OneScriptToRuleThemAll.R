@@ -1,7 +1,15 @@
-# Profanity Filtering
+### Load necessary libraries
+#library(openNLP)
+#library(NLP)
+library(tm)
+library(quanteda)
+library(SnowballC)
 
-# Source for profane dictionary / list of unwanted words:
-# "http://www.freewebheaders.com/wordpress/wp-content/uploads/full-list-of-bad-words-banned-by-google-txt-file.zip"
+### Set working directory (Raw Data - Windows OS)
+setwd("C://Users//Yanal Kashou//Data Science//Projects//R//DataScienceCapstone//data//raw_data")
+
+### Create Corpus 
+TextCorpus <- Corpus(DirSource(getwd()))
 
 ### Set working directory (Banned Words - Windows OS)
 setwd("C://Users//Yanal Kashou//Data Science//Projects//R//DataScienceCapstone//data//banned_words")
@@ -40,4 +48,4 @@ inspect(PoliteCorpus)
 
 # Term Document Matrix
 PoliteCorpusTDM <- TermDocumentMatrix(PoliteCorpus)
-        
+
