@@ -11,16 +11,15 @@
 - [x] Largest element of data (Longest line)
 
 ## Text Processing & Visualization
-- [ ] Convert all words to lowercase
+- [x] Convert all words to lowercase
 - [x] Remove punctuation
 - [x] Remove stop words
 - [x] Remove numbers
 - [x] Remove whitespace
-- [ ] Reduce to stemwords
-- [ ] Create a profanity filter function
-        - [x] Download a profane dictionary / list of unwanted words
-        - [x] Trim whitespace at the end of the word
-        - [ ] Remove these words from original corpus
+- [x] Reduce to stemwords
+- [x] Download a profane dictionary / list of unwanted words
+- [x] Trim whitespace at the end of the word
+- [x] Remove profane words from original corpus
 
 ## ML Prediction Algorithms
 - [ ] Split into Training - Testing - Validation
