@@ -5,8 +5,8 @@ library(tm)
 library(quanteda)
 library(SnowballC)
 
-### Set working directory (Windows OS)
-setwd("C://Users//Yanal Kashou//Data Science//Projects//R//DataScienceCapstone//data")
+### Set working directory (Raw Data - Windows OS)
+RawDataDirectory <- setwd("C://Users//Yanal Kashou//Data Science//Projects//R//DataScienceCapstone//data//raw_data")
 
 # Tokenization
 ## From file to tokenized file [Identify words, punctuation and numbers]
@@ -26,12 +26,11 @@ LengthOfNewsText <- length(RawNewsText)
 
 ### Tokenize the text
 TokenizedTwitterText <- tokenize(RawTwitterText)
-close(con)
+TokenizedBlogsText <- tokenize(RawBlogsText)
+TokenizedNewsText <- tokenize(RawNewsText)
 
-### Create Corpus
-TwitterCorpus <- Corpus(VectorSource(RawTwitterText))
-BlogsCorpus <- Corpus(VectorSource(RawBlogsText))
-NewsCorpus <- Corpus(VectorSource(RawNewsText))
+### Create Corpus 
+TextCorpus <- Corpus(DirSource(RawDataDirectory))
 
 ### 
 TwitterDocTermMatrix <- DocumentTermMatrix(TwitterCorpus) 
@@ -41,4 +40,5 @@ NewsDocTermMatrix <- DocumentTermMatrix(NewsCorpus)
 inspect(TwitterDocTermMatrix)
 
 
+close(con1, con2, con3)
 
