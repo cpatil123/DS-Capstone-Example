@@ -27,7 +27,7 @@ trim.ending <- function (x)
         sub("\\s+$", "", x)
 trim.ending(BannedWords)
 
-# [PENDING ]Remove words from tokenized text 
+# Remove words from tokenized text 
 inspect(TextCorpus)
 CleanCorpus <- tm_map(TextCorpus, removePunctuation)
 CleanCorpus <- tm_map(CleanCorpus, stripWhitespace)
@@ -46,6 +46,5 @@ inspect(StemmedCorpus)
 PoliteCorpus <- tm_map(StemmedCorpus, removeWords, BannedWords)
 inspect(PoliteCorpus)
 
-# Term Document Matrix
-PoliteCorpusTDM <- TermDocumentMatrix(PoliteCorpus)
-
+# [PENDING] Document Term Matrix
+dtm <- DocumentTermMatrix(PoliteCorpus[[1]])
