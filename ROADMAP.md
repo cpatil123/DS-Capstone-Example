@@ -1,8 +1,8 @@
 # Capstone Project Roadmap
 
 ## Loading Data
-- [ ] Read in a 5% sample of raw data 
-- [ ] Convert sampled raw data to corpus form
+- [x] Read in a 15% sample of raw data 
+- [x] Convert sampled raw data to corpus form
 - [ ] Instantiate DocumentTermMatrix on each corpus
 
 ## Exploratory analysis
