@@ -81,13 +81,6 @@ writeLines(as.character(CleanCorpus[[1]]), con="cleaned.twitter.txt")
 writeLines(as.character(CleanCorpus[[2]]), con="cleaned.blogs.txt")
 writeLines(as.character(CleanCorpus[[3]]), con="cleaned.news.txt")
 
-# Stem the documents
-#StemmedCorpus <- tm_map(CleanCorpus, stemDocument)
-#inspect(StemmedCorpus)
-#writeLines(as.character(StemmedCorpus[[1]]), con="stemmed.twitter.txt")
-#writeLines(as.character(StemmedCorpus[[2]]), con="stemmed.blogs.txt")
-#writeLines(as.character(StemmedCorpus[[3]]), con="stemmed.news.txt")
-
 # Remove Profanity
 PoliteCorpus <- tm_map(StemmedCorpus, removeWords, BannedWords)
 inspect(PoliteCorpus)
