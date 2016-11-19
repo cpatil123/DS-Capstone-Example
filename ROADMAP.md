@@ -3,7 +3,7 @@
 ## Loading Data
 - [x] Read in a 15% sample of raw data 
 - [x] Convert sampled raw data to corpus form
-- [ ] Instantiate DocumentTermMatrix on each corpus
+- [x] Create DocumentTermMatrix for each document
 
 ## Exploratory analysis
 - [x] Length of data
@@ -20,6 +20,12 @@
 - [x] Download a profane dictionary / list of unwanted words
 - [x] Trim whitespace at the end of the word
 - [x] Remove profane words from original corpus
+
+# Milestone Report
+- [x] Change theme to Cerulean
+- [x] Segment report
+- [ ] Create word visualizations
+- [ ] Finish content write-up
 
 ## ML Prediction Algorithms
 - [ ] Split into Training - Testing - Validation
