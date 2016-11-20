@@ -1,0 +1,26 @@
+Exploratory Data Analysis Text Content Template Guide
+
+# Project Overview
+This is the milestone report for the Coursera Data Science Capstone Project, in which we aim to implement an algorithm to predict the next word, given raw text data that needs to be cleaned and analysed. The topic of our report is **NLP (Natural Language Processing)**.
+
+------------------------------------------------------------------------------------------
+![Caption for the picture.](/path/to/image.png)
+------------------------------------------------------------------------------------------
+
+# Our Data
+------------------------------------------------------------------------------------------
+                           PREVIEW OF WORD/LINE/CHARACTER COUNT
+------------------------------------------------------------------------------------------
+
+# Exploratory Analysis and Visualization
+------------------------------------------------------------------------------------------
+                                PLOTS - Size and N-Grams
+------------------------------------------------------------------------------------------
+
+# N-Grams
+
+# Further Plans
+
+* Test algorithms for computation efficiency (speed) and accuracy
+* Attempt at the implementation of an ANN (Artificial Neural Network)
+* Deploy an app using the implemented algorithm to shinyapps.io

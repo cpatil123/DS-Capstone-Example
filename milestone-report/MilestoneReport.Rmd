@@ -1,0 +1,59 @@
+---
+title: "MilestoneReport"
+author: "Yanal Kashou"
+date: "November 20, 2016"
+output: 
+    html_document:
+        theme: cerulean
+        highlight: tango
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Project Overview
+This is the milestone report for the Coursera Data Science Capstone Project, in which we aim to implement an algorithm to predict the next word, given raw text data that needs to be cleaned and analysed. The topic of our report is **NLP (Natural Language Processing)**.
+
+### Our Data
+#### Data Loading
+----------------------------------------------------------------------------------------
+<center>![Step 1](step1.png)</center>
+----------------------------------------------------------------------------------------
+
+                           PREVIEW OF WORD/LINE/CHARACTER COUNT
+
+#### Data Cleaning
+
+----------------------------------------------------------------------------------------
+<center>![Step 2](step2.png)</center>
+----------------------------------------------------------------------------------------
+
+### Exploratory Analysis and Visualization  
+
+----------------------------------------------------------------------------------------
+                                PLOTS - Size
+----------------------------------------------------------------------------------------
+
+### N-Grams 
+
+----------------------------------------------------------------------------------------
+<center>![Step 3](step3.png)</center>
+----------------------------------------------------------------------------------------
+
+### Further Plans  
+#### Algorithm
+
+----------------------------------------------------------------------------------------
+<center>![Step 4](step4.png)</center>
+----------------------------------------------------------------------------------------
+
+* Test algorithms for computation efficiency (speed) and accuracy  
+* Attempt at the implementation of an ANN (Artificial Neural Network)  
+  
+
+#### Data Product
+  
+----------------------------------------------------------------------------------------
+<center>![Step 5](step5.png)</center>
+----------------------------------------------------------------------------------------
+* Deploy an app using the implemented algorithm to shinyapps.io

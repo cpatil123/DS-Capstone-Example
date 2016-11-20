@@ -1,3 +1,22 @@
+---
+title: "SwiftKey NLP Milestone Report"
+author: "Yanal Kashou"
+date: "19 November 2016"
+output: 
+    html_document:
+        theme: cerulean
+        highlight: tango
+        keep_md: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Project Overview
+This is the milestone report for the Coursera Data Science Capstone Project, in which we aim to implement an algorithm to predict the next word, given raw text data that needs to be cleaned and analysed. The topic of our report is **NLP (Natural Language Processing)**.
+
+# Reading in The Data
+```{r data loading, message=FALSE, warning=FALSE, include=FALSE}
 ### Load necessary libraries
 #library(openNLP)
 #library(NLP)
@@ -29,15 +48,29 @@ CharLengthOfNewsText <- sum(nchar(RawNewsText))
 CharLengthOfTwitterText <- sum(nchar(RawTwitterText))
 
 WordData <- data.frame("Line Count" = c(LengthOfBlogsText, LengthOfNewsText, LengthOfTwitterText), "Word Count" = c(0, 0, 0), "Character Count" = c(CharLengthOfBlogsText, CharLengthOfNewsText,  CharLengthOfTwitterText))
-WordData
+
 
 # Close file connections
 close(con1, con2, con3)
+```
+# Exploratory Analysis and Visualization
 
+## Textual Analysis
+```{r exploratory data, echo=TRUE}
+WordData
+```
+## Size Reduction
+
+
+# Data Sampling & Cleaning
+```{r sampling, echo=TRUE, message=FALSE, warning=FALSE}
 # Sample 15% of the data
 SampledTwitterText <- RawTwitterText[rbinom(LengthOfTwitterText*.15, LengthOfTwitterText, .5)]
 SampledBlogsText <- RawBlogsText[rbinom(LengthOfBlogsText*.15, LengthOfBlogsText, .5)]
 SampledNewsText <- RawNewsText[rbinom(LengthOfNewsText*.15, LengthOfNewsText, .5)]
+```
+
+```{r, message=FALSE, warning=FALSE, include=FALSE}
 
 ### Set working directory (processed_data)
 setwd("C://Users//Yanal Kashou//Data Science//Projects//R//DataScienceCapstone//data//processed_data")
@@ -56,25 +89,15 @@ TextCorpus <- Corpus(DirSource(directory = getwd(), pattern="sampled.*.txt|sampl
 inspect(TextCorpus)
 str(TextCorpus)
 
-### Set working directory (Banned Words - Windows OS)
-setwd("C://Users//Yanal Kashou//Data Science//Projects//R//DataScienceCapstone//data//banned_words")
+```
 
-# Open file connection
-con7 <- file("banned-words.txt", "r")
-BannedWords <- readLines(con7)
-BannedWords
 
-# Close file connection
-close(con7)
 
-# Trim whitespace at the end of the word
-trim.ending <- function (x)
-        sub("\\s+$", "", x)
-trim.ending(BannedWords)
-
+```{r, message=FALSE, warning=FALSE, include=FALSE}
 ### Set working directory (processed_data)
 setwd("C://Users//Yanal Kashou//Data Science//Projects//R//DataScienceCapstone//data//processed_data")
-
+```
+```{r cleaning and preprocessing, echo=TRUE, message=FALSE, warning=FALSE}
 # Remove punctuation, whitespace, numbers, stopwords from text and convert to lower case 
 inspect(TextCorpus)
 CleanCorpus <- tm_map(TextCorpus, removePunctuation)
@@ -83,13 +106,31 @@ CleanCorpus <- tm_map(CleanCorpus, removeNumbers)
 CleanCorpus <- tm_map(CleanCorpus, removeWords, stopwords("english"))
 CleanCorpus <- tm_map(CleanCorpus, content_transformer(tolower))
 inspect(CleanCorpus)
-
+```
+```{r, message=FALSE, warning=FALSE, include=FALSE}
 writeLines(as.character(CleanCorpus[[1]]), con="cleaned.twitter.txt")
 writeLines(as.character(CleanCorpus[[2]]), con="cleaned.blogs.txt")
 writeLines(as.character(CleanCorpus[[3]]), con="cleaned.news.txt")
+```
 
 # Remove Profanity
-PoliteCorpus <- tm_map(StemmedCorpus, removeWords, BannedWords)
+```{r trim whitespace function, message=FALSE, warning=FALSE, include=FALSE}
+### Set working directory (Banned Words - Windows OS)
+setwd("C://Users//Yanal Kashou//Data Science//Projects//R//DataScienceCapstone//data//banned_words")
+
+# Open file connection
+con7 <- file("banned-words.txt", "r")
+BannedWords <- readLines(con7)
+
+# Close file connection
+close(con7)
+# Trim whitespace at the end of the word
+trim.ending <- function (x)
+        sub("\\s+$", "", x)
+trim.ending(BannedWords)
+
+
+PoliteCorpus <- tm_map(CleanCorpus, removeWords, BannedWords)
 inspect(PoliteCorpus)
 
 writeLines(as.character(PoliteCorpus[[1]]), con="polite.twitter.txt")
@@ -105,6 +146,8 @@ CharLengthDF <- data.frame("Original" = c(31521201, 2248401, 24324928), "Post-Cl
 CharLengthDF <- CharLengthDF[1:3, ]/10^6
 View(CharLengthDF)
 
+
+
 # Final Corpus and export to txt
 FinalCorpus <- tm_map(PoliteCorpus, PlainTextDocument)
 
@@ -116,8 +159,15 @@ FinalTwitterText <- readLines(con = "final.twitter.txt")
 FinalBlogsText <- readLines(con = "final.blogs.txt")
 FinalNewsText <- readLines(con = "final.news.txt")
 
-# [PENDING] Document Term Matrix
-#dfm(con = "polite.twitter.txt", ignoredFeatures = stopwords("english"), stem = TRUE)
+# Document Term Matrix
 TwitterDFM <- dfm(FinalTwitterText, stem = TRUE)
 BlogsDFM <- dfm(FinalBlogsText, stem = TRUE)
 NewsDFM <- dfm(FinalTwitterText, stem = TRUE)
+
+# N-Grams
+
+# Further Plans
+
+* Test algorithms for computation efficiency (speed) and accuracy
+* Attempt at the implementation of an ANN (Artificial Neural Network)
+* Deploy an app using the implemented algorithm to shinyapps.io
