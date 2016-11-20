@@ -45,15 +45,21 @@ RawBlogsText <- readLines(con1)
 RawNewsText <- readLines(con2)
 RawTwitterText <- readLines(con3)
 
+blogs.info <- file.info("en_US.blogs.txt")
+blogs.size <- blogs.info$size / 10^6
+news.info <- file.info("en_US.news.txt")
+news.size <- news.info$size / 10^6
+twitter.info <- file.info("en_US.twitter.txt")
+twitter.size <- twitter.info$size / 10^6
 Blogs.Lines <- length(RawBlogsText)
 News.Lines <- length(RawNewsText)
 Twitter.Lines <- length(RawTwitterText)
-
 CharLengthOfBlogsText <- sum(nchar(RawBlogsText))
 CharLengthOfNewsText <- sum(nchar(RawNewsText))
 CharLengthOfTwitterText <- sum(nchar(RawTwitterText))
 
-WordLineChar.df <- data.frame('Lines' = c(Blogs.Lines, News.Lines, Twitter.Lines), "Words" = c(0, 0, 0), "Characters" = c(CharLengthOfBlogsText, CharLengthOfNewsText,  CharLengthOfTwitterText), row.names = c("Blogs", "News", "Twitter"))
+WordLineChar.df <- data.frame('Raw Size (MB)' = c(blogs.size, news.size, twitter.size), 'Lines' = c(Blogs.Lines, News.Lines, Twitter.Lines), 'Words' = c(0, 0, 0), 'Characters' = c(CharLengthOfBlogsText, CharLengthOfNewsText,  CharLengthOfTwitterText), row.names = c('Blogs', 'News', 'Twitter'))
+colnames(WordLineChar.df) <- c("Size (MB)", "Line Count", "Word Count", "Character Count")
 
 # Close file connections
 close(con1, con2, con3)
@@ -62,7 +68,50 @@ close(con1, con2, con3)
 kable(WordLineChar.df)
 ```
 
-#### Data Cleaning
+#### Data Sampling and Cleaning
+
+To make it easier for computation, we have to reduce the size of the data to an acceptable value, in this case we will take a random binomial sample of 15% of each dataset to work with, clean, analyze and visualize.  
+
+```{r, message=FALSE, warning=FALSE, include=FALSE}
+## Set working directory (processed_data)
+setwd("C://Users//Yanal Kashou//Data Science//Projects//R//DataScienceCapstone//data//processed_data")
+
+# 15% Sampling
+SampledBlogsText <- RawBlogsText[rbinom(Blogs.Lines*.15, Blogs.Lines, .5)]
+SampledNewsText <- RawNewsText[rbinom(News.Lines*.15, News.Lines, .5)]
+SampledTwitterText <- RawTwitterText[rbinom(Twitter.Lines*.15, Twitter.Lines, .5)]
+
+# Export sampled text to .txt files
+
+con4 <- file("sampled.blogs.txt")
+writeLines(SampledBlogsText, con4)
+con5 <- file("sampled.news.txt")
+writeLines(SampledNewsText, con5)
+con6 <- file("sampled.twitter.txt")
+writeLines(SampledTwitterText, con6)
+close(con4, con5, con6)
+
+# Table
+s.blogs.info <- file.info("sampled.blogs.txt")
+s.blogs.size <- s.blogs.info$size / 10^6
+s.news.info <- file.info("sampled.news.txt")
+s.news.size <- s.news.info$size / 10^6
+s.twitter.info <- file.info("sampled.twitter.txt")
+s.twitter.size <- s.twitter.info$size / 10^6
+s.Blogs.Lines <- length(SampledBlogsText)
+s.News.Lines <- length(SampledNewsText)
+s.Twitter.Lines <- length(SampledTwitterText)
+s.CharLengthOfBlogsText <- sum(nchar(SampledBlogsText))
+s.CharLengthOfNewsText <- sum(nchar(SampledNewsText))
+s.CharLengthOfTwitterText <- sum(nchar(SampledTwitterText))
+
+s.WordLineChar.df <- data.frame('Sample Size (MB)' = c(s.blogs.size, s.news.size, s.twitter.size), 'Lines' = c(s.Blogs.Lines, s.News.Lines, s.Twitter.Lines), 'Words' = c(0, 0, 0), 'Characters' = c(s.CharLengthOfBlogsText, s.CharLengthOfNewsText,  s.CharLengthOfTwitterText), row.names = c('Blogs', 'News', 'Twitter'))
+colnames(s.WordLineChar.df) <- c("Sample Size (MB)", "Line Count", "Word Count", "Character Count")
+```
+```{r Sampled WordLineChar Table, echo=FALSE, message=FALSE, warning=FALSE}
+kable(s.WordLineChar.df)
+```
+
 
 <center>![Step 2](step2.png)</center>
 ----------------------------------------------------------------------------------------

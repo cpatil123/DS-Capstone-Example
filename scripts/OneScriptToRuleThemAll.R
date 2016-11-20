@@ -19,6 +19,13 @@ RawBlogsText <- readLines(con1)
 RawNewsText <- readLines(con2)
 RawTwitterText <- readLines(con3)
 
+blogs.info <- file.info("en_US.blogs.txt")
+blogs.size <- blogs.info$size / 10^6
+news.info <- file.info("en_US.news.txt")
+news.size <- news.info$size / 10^6
+twitter.info <- file.info("en_US.twitter.txt")
+twitter.size <- twitter.info$size / 10^6
+
 Blogs.Lines <- length(RawBlogsText)
 News.Lines <- length(RawNewsText)
 Twitter.Lines <- length(RawTwitterText)
@@ -27,7 +34,7 @@ CharLengthOfBlogsText <- sum(nchar(RawBlogsText))
 CharLengthOfNewsText <- sum(nchar(RawNewsText))
 CharLengthOfTwitterText <- sum(nchar(RawTwitterText))
 
-WordLineChar.df <- data.frame("Line Count" = c(Blogs.Lines, News.Lines, Twitter.Lines), "Word Count" = c(0, 0, 0), "Character Count" = c(CharLengthOfBlogsText, CharLengthOfNewsText,  CharLengthOfTwitterText))
+WordLineChar.df <- data.frame('Size (MB)' = c(blogs.size, news.size, twitter.size), 'Lines' = c(Blogs.Lines, News.Lines, Twitter.Lines), 'Words' = c(0, 0, 0), 'Characters' = c(CharLengthOfBlogsText, CharLengthOfNewsText,  CharLengthOfTwitterText), row.names = c('Blogs', 'News', 'Twitter'))
 
 # Close file connections
 close(con1, con2, con3)
