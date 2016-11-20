@@ -9,29 +9,68 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(
+	echo = TRUE,
+	message = FALSE,
+	warning = FALSE
+)
 ```
+```{r libraries, message=FALSE, warning=FALSE, include=FALSE}
+library(knitr)
+library(tm)
+library(quanteda)
+library(SnowballC)
+```
+
+
 # Project Overview
-This is the milestone report for the Coursera Data Science Capstone Project, in which we aim to implement an algorithm to predict the next word, given raw text data that needs to be cleaned and analysed. The topic of our report is **NLP (Natural Language Processing)**.
+This is the milestone report for the Coursera Data Science Capstone Project, in which we aim to implement an algorithm to predict the next word, given raw text data that needs to be cleaned and analysed.  
+The topic of our report is **NLP (Natural Language Processing)**.
 
 ### Our Data
 #### Data Loading
+
 ----------------------------------------------------------------------------------------
 <center>![Step 1](step1.png)</center>
-----------------------------------------------------------------------------------------
 
-                           PREVIEW OF WORD/LINE/CHARACTER COUNT
+```{r Data Loading, message=FALSE, warning=FALSE, include=FALSE}
+set.seed(0)
+setwd("C://Users//Yanal Kashou//Data Science//Projects//R//DataScienceCapstone//data//raw_data")
+
+con1 <- file("en_US.blogs.txt", "r") 
+con2 <- file("en_US.news.txt", "r")
+con3 <- file("en_US.twitter.txt", "r")
+
+RawBlogsText <- readLines(con1)
+RawNewsText <- readLines(con2)
+RawTwitterText <- readLines(con3)
+
+Blogs.Lines <- length(RawBlogsText)
+News.Lines <- length(RawNewsText)
+Twitter.Lines <- length(RawTwitterText)
+
+CharLengthOfBlogsText <- sum(nchar(RawBlogsText))
+CharLengthOfNewsText <- sum(nchar(RawNewsText))
+CharLengthOfTwitterText <- sum(nchar(RawTwitterText))
+
+WordLineChar.df <- data.frame("Line Count" = c(Blogs.Lines, News.Lines, Twitter.Lines), "Word Count" = c(0, 0, 0), "Character Count" = c(CharLengthOfBlogsText, CharLengthOfNewsText,  CharLengthOfTwitterText))
+
+# Close file connections
+close(con1, con2, con3)
+```
+```{r WordLineChar Table, message=FALSE, warning=FALSE}
+kable(WordLineChar.df)
+```
 
 #### Data Cleaning
 
-----------------------------------------------------------------------------------------
 <center>![Step 2](step2.png)</center>
 ----------------------------------------------------------------------------------------
 
 ### Exploratory Analysis and Visualization  
 
 ----------------------------------------------------------------------------------------
-                                PLOTS - Size
+                Plot: Character Count before Cleaning and after Cleaning
 ----------------------------------------------------------------------------------------
 
 ### N-Grams 

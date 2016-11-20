@@ -11,25 +11,23 @@ set.seed(0)
 ### Set working directory (Raw Data - Windows OS)
 setwd("C://Users//Yanal Kashou//Data Science//Projects//R//DataScienceCapstone//data//raw_data")
 
-# Open file connections
-con1 <- file("en_US.twitter.txt", "r") 
-con2 <- file("en_US.blogs.txt", "r")
-con3 <- file("en_US.news.txt", "r")
+con1 <- file("en_US.blogs.txt", "r") 
+con2 <- file("en_US.news.txt", "r")
+con3 <- file("en_US.twitter.txt", "r")
 
 RawBlogsText <- readLines(con1)
 RawNewsText <- readLines(con2)
 RawTwitterText <- readLines(con3)
 
-LengthOfBlogsText <- length(RawBlogsText)
-LengthOfNewsText <- length(RawNewsText)
-LengthOfTwitterText <- length(RawTwitterText)
+Blogs.Lines <- length(RawBlogsText)
+News.Lines <- length(RawNewsText)
+Twitter.Lines <- length(RawTwitterText)
 
 CharLengthOfBlogsText <- sum(nchar(RawBlogsText))
 CharLengthOfNewsText <- sum(nchar(RawNewsText))
 CharLengthOfTwitterText <- sum(nchar(RawTwitterText))
 
-WordData <- data.frame("Line Count" = c(LengthOfBlogsText, LengthOfNewsText, LengthOfTwitterText), "Word Count" = c(0, 0, 0), "Character Count" = c(CharLengthOfBlogsText, CharLengthOfNewsText,  CharLengthOfTwitterText))
-WordData
+WordLineChar.df <- data.frame("Line Count" = c(Blogs.Lines, News.Lines, Twitter.Lines), "Word Count" = c(0, 0, 0), "Character Count" = c(CharLengthOfBlogsText, CharLengthOfNewsText,  CharLengthOfTwitterText))
 
 # Close file connections
 close(con1, con2, con3)
@@ -103,8 +101,7 @@ CharLengthDF <- data.frame("Original" = c(31521201, 2248401, 24324928), "Post-Cl
 
 # Divide char length by 10^6 to appear in millions
 CharLengthDF <- CharLengthDF[1:3, ]/10^6
-View(CharLengthDF)
-
+CharLengthDF
 # Final Corpus and export to txt
 FinalCorpus <- tm_map(PoliteCorpus, PlainTextDocument)
 
@@ -121,3 +118,5 @@ FinalNewsText <- readLines(con = "final.news.txt")
 TwitterDFM <- dfm(FinalTwitterText, stem = TRUE)
 BlogsDFM <- dfm(FinalBlogsText, stem = TRUE)
 NewsDFM <- dfm(FinalTwitterText, stem = TRUE)
+
+write.table(c(CharLengthDF), file = "CharLengthTable")
