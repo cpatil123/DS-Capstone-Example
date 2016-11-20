@@ -123,7 +123,7 @@ writeLines(as.character(CleanCorpus[[2]]), con="cleaned.blogs.txt")
 writeLines(as.character(CleanCorpus[[3]]), con="cleaned.news.txt")
 
 # Remove Profanity
-PoliteCorpus <- tm_map(StemmedCorpus, removeWords, BannedWords)
+PoliteCorpus <- tm_map(CleanCorpus, removeWords, BannedWords)
 inspect(PoliteCorpus)
 
 writeLines(as.character(PoliteCorpus[[1]]), con="polite.twitter.txt")
@@ -148,6 +148,7 @@ writeLines(as.character(FinalCorpus[[3]]), con="final.news.txt")
 FinalTwitterText <- readLines(con = "final.twitter.txt")
 FinalBlogsText <- readLines(con = "final.blogs.txt")
 FinalNewsText <- readLines(con = "final.news.txt")
+
 
 # [PENDING] Document Term Matrix
 #dfm(con = "polite.twitter.txt", ignoredFeatures = stopwords("english"), stem = TRUE)
