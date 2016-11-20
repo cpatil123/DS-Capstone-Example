@@ -53,12 +53,12 @@ CharLengthOfBlogsText <- sum(nchar(RawBlogsText))
 CharLengthOfNewsText <- sum(nchar(RawNewsText))
 CharLengthOfTwitterText <- sum(nchar(RawTwitterText))
 
-WordLineChar.df <- data.frame("Line Count" = c(Blogs.Lines, News.Lines, Twitter.Lines), "Word Count" = c(0, 0, 0), "Character Count" = c(CharLengthOfBlogsText, CharLengthOfNewsText,  CharLengthOfTwitterText))
+WordLineChar.df <- data.frame('Lines' = c(Blogs.Lines, News.Lines, Twitter.Lines), "Words" = c(0, 0, 0), "Characters" = c(CharLengthOfBlogsText, CharLengthOfNewsText,  CharLengthOfTwitterText), row.names = c("Blogs", "News", "Twitter"))
 
 # Close file connections
 close(con1, con2, con3)
 ```
-```{r WordLineChar Table, message=FALSE, warning=FALSE}
+```{r WordLineChar Table, echo=FALSE, message=FALSE, warning=FALSE}
 kable(WordLineChar.df)
 ```
 

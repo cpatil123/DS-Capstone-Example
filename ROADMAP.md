@@ -24,6 +24,7 @@
 # Milestone Report
 - [x] Change theme to Cerulean
 - [x] Segment report
+- [x] Include MindMup2.0 maps
 - [ ] Create word visualizations
 - [ ] Finish content write-up
 
