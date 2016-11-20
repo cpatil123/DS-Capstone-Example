@@ -20,8 +20,8 @@ library(knitr)
 library(tm)
 library(quanteda)
 library(SnowballC)
+library(ggplot2)
 ```
-
 
 # Project Overview
 This is the milestone report for the Coursera Data Science Capstone Project, in which we aim to implement an algorithm to predict the next word, given raw text data that needs to be cleaned and analysed.  
@@ -58,8 +58,8 @@ CharLengthOfBlogsText <- sum(nchar(RawBlogsText))
 CharLengthOfNewsText <- sum(nchar(RawNewsText))
 CharLengthOfTwitterText <- sum(nchar(RawTwitterText))
 
-WordLineChar.df <- data.frame('Raw Size (MB)' = c(blogs.size, news.size, twitter.size), 'Lines' = c(Blogs.Lines, News.Lines, Twitter.Lines), 'Words' = c(0, 0, 0), 'Characters' = c(CharLengthOfBlogsText, CharLengthOfNewsText,  CharLengthOfTwitterText), row.names = c('Blogs', 'News', 'Twitter'))
-colnames(WordLineChar.df) <- c("Size (MB)", "Line Count", "Word Count", "Character Count")
+WordLineChar.df <- data.frame('Dataset' = c("Blogs", "News", "Twitter"), 'Raw Size (MB)' = c(blogs.size, news.size, twitter.size), 'Lines' = c(Blogs.Lines, News.Lines, Twitter.Lines), 'Words' = c(0, 0, 0), 'Characters' = c(CharLengthOfBlogsText, CharLengthOfNewsText,  CharLengthOfTwitterText))
+colnames(WordLineChar.df) <- c("Dataset", "Size (MB)", "Line Count", "Word Count", "Character Count")
 
 # Close file connections
 close(con1, con2, con3)
@@ -105,13 +105,12 @@ s.CharLengthOfBlogsText <- sum(nchar(SampledBlogsText))
 s.CharLengthOfNewsText <- sum(nchar(SampledNewsText))
 s.CharLengthOfTwitterText <- sum(nchar(SampledTwitterText))
 
-s.WordLineChar.df <- data.frame('Sample Size (MB)' = c(s.blogs.size, s.news.size, s.twitter.size), 'Lines' = c(s.Blogs.Lines, s.News.Lines, s.Twitter.Lines), 'Words' = c(0, 0, 0), 'Characters' = c(s.CharLengthOfBlogsText, s.CharLengthOfNewsText,  s.CharLengthOfTwitterText), row.names = c('Blogs', 'News', 'Twitter'))
-colnames(s.WordLineChar.df) <- c("Sample Size (MB)", "Line Count", "Word Count", "Character Count")
+s.WordLineChar.df <- data.frame('Dataset' = c("Blogs", "News", "Twitter"), 'Sample Size (MB)' = c(s.blogs.size, s.news.size, s.twitter.size), 'Lines' = c(s.Blogs.Lines, s.News.Lines, s.Twitter.Lines), 'Words' = c(0, 0, 0), 'Characters' = c(s.CharLengthOfBlogsText, s.CharLengthOfNewsText,  s.CharLengthOfTwitterText))
+colnames(s.WordLineChar.df) <- c("Dataset", "Sample Size (MB)", "Line Count", "Word Count", "Character Count")
 ```
 ```{r Sampled WordLineChar Table, echo=FALSE, message=FALSE, warning=FALSE}
 kable(s.WordLineChar.df)
 ```
-
 
 <center>![Step 2](step2.png)</center>
 ----------------------------------------------------------------------------------------

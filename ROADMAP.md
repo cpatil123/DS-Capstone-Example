@@ -21,7 +21,7 @@
 - [x] Trim whitespace at the end of the word
 - [x] Remove profane words from original corpus
 
-# Milestone Report
+## Milestone Report
 - [x] Change theme to Cerulean
 - [x] Segment report
 - [x] Include MindMup2.0 maps
