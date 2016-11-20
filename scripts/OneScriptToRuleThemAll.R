@@ -34,27 +34,56 @@ CharLengthOfBlogsText <- sum(nchar(RawBlogsText))
 CharLengthOfNewsText <- sum(nchar(RawNewsText))
 CharLengthOfTwitterText <- sum(nchar(RawTwitterText))
 
-WordLineChar.df <- data.frame('Size (MB)' = c(blogs.size, news.size, twitter.size), 'Lines' = c(Blogs.Lines, News.Lines, Twitter.Lines), 'Words' = c(0, 0, 0), 'Characters' = c(CharLengthOfBlogsText, CharLengthOfNewsText,  CharLengthOfTwitterText), row.names = c('Blogs', 'News', 'Twitter'))
+Blogs.Words <- sum(stri_count(RawBlogsText, regex = "\\S+"))
+News.Words <- sum(stri_count(RawNewsText, regex = "\\S+"))
+Twitter.Words <- sum(stri_count(RawTwitterText, regex = "\\S+"))
+
+df <- data.frame('Size (MB)' = c(blogs.size, news.size, twitter.size), 'Lines' = c(Blogs.Lines, News.Lines, Twitter.Lines), 'Words' = c(Blogs.Words, News.Words, Twitter.Words), 'Characters' = c(CharLengthOfBlogsText, CharLengthOfNewsText,  CharLengthOfTwitterText), row.names = c('Blogs', 'News', 'Twitter'))
 
 # Close file connections
 close(con1, con2, con3)
 
-# Sample 15% of the data
-SampledTwitterText <- RawTwitterText[rbinom(LengthOfTwitterText*.15, LengthOfTwitterText, .5)]
-SampledBlogsText <- RawBlogsText[rbinom(LengthOfBlogsText*.15, LengthOfBlogsText, .5)]
-SampledNewsText <- RawNewsText[rbinom(LengthOfNewsText*.15, LengthOfNewsText, .5)]
-
-### Set working directory (processed_data)
+## Set working directory (processed_data)
 setwd("C://Users//Yanal Kashou//Data Science//Projects//R//DataScienceCapstone//data//processed_data")
 
+# 15% Sampling
+SampledBlogsText <- RawBlogsText[rbinom(Blogs.Lines*.15, Blogs.Lines, .5)]
+SampledNewsText <- RawNewsText[rbinom(News.Lines*.15, News.Lines, .5)]
+SampledTwitterText <- RawTwitterText[rbinom(Twitter.Lines*.15, Twitter.Lines, .5)]
+
+# Tokenize
+TokenizedBlogs <- tokenize(SampledBlogsText)
+TokenizedNews <- tokenize(SampledNewsText)
+TokenizedTwitter <- tokenize(SampledTwitterText)
+
 # Export sampled text to .txt files
-con4 <- file("sampled.twitter.txt")
-writeLines(SampledTwitterText, con4)
-con5 <- file("sampled.blogs.txt")
-writeLines(SampledBlogsText, con5)
-con6 <- file("sampled.news.txt")
-writeLines(SampledNewsText, con6)
+con4 <- file("sampled.blogs.txt")
+writeLines(SampledBlogsText, con4)
+con5 <- file("sampled.news.txt")
+writeLines(SampledNewsText, con5)
+con6 <- file("sampled.twitter.txt")
+writeLines(SampledTwitterText, con6)
 close(con4, con5, con6)
+
+# Table
+s.blogs.info <- file.info("sampled.blogs.txt")
+s.blogs.size <- s.blogs.info$size / 10^6
+s.news.info <- file.info("sampled.news.txt")
+s.news.size <- s.news.info$size / 10^6
+s.twitter.info <- file.info("sampled.twitter.txt")
+s.twitter.size <- s.twitter.info$size / 10^6
+s.Blogs.Lines <- length(SampledBlogsText)
+s.News.Lines <- length(SampledNewsText)
+s.Twitter.Lines <- length(SampledTwitterText)
+s.CharLengthOfBlogsText <- sum(nchar(SampledBlogsText))
+s.CharLengthOfNewsText <- sum(nchar(SampledNewsText))
+s.CharLengthOfTwitterText <- sum(nchar(SampledTwitterText))
+s.Blogs.Words <- sum(stri_count(TokenizedBlogs, regex = "\\S+"))
+s.News.Words <- sum(stri_count(TokenizedNews, regex = "\\S+"))
+s.Twitter.Words <- sum(stri_count(TokenizedTwitter, regex = "\\S+"))
+
+s.df <- data.frame('Dataset' = c("Blogs", "News", "Twitter"), 'Sample Size (MB)' = c(s.blogs.size, s.news.size, s.twitter.size), 'Lines' = c(s.Blogs.Lines, s.News.Lines, s.Twitter.Lines), 'Words' = c(s.Blogs.Words, s.News.Words, s.Twitter.Words), 'Characters' = c(s.CharLengthOfBlogsText, s.CharLengthOfNewsText,  s.CharLengthOfTwitterText))
+colnames(s.df) <- c("Dataset", "Sample Size (MB)", "Line Count", "Word Count", "Character Count")
 
 ### Create Corpus 
 TextCorpus <- Corpus(DirSource(directory = getwd(), pattern="sampled.*.txt|sampled.*.txt"))

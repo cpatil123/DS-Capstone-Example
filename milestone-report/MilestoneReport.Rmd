@@ -21,6 +21,9 @@ library(tm)
 library(quanteda)
 library(SnowballC)
 library(ggplot2)
+library(gridExtra)
+library(reshape2)
+library(stringi)
 ```
 
 # Project Overview
@@ -57,15 +60,19 @@ Twitter.Lines <- length(RawTwitterText)
 CharLengthOfBlogsText <- sum(nchar(RawBlogsText))
 CharLengthOfNewsText <- sum(nchar(RawNewsText))
 CharLengthOfTwitterText <- sum(nchar(RawTwitterText))
+Blogs.Words <- sum(stri_count(RawBlogsText, regex = "\\S+"))
+News.Words <- sum(stri_count(RawNewsText, regex = "\\S+"))
+Twitter.Words <- sum(stri_count(RawTwitterText, regex = "\\S+"))
 
-WordLineChar.df <- data.frame('Dataset' = c("Blogs", "News", "Twitter"), 'Raw Size (MB)' = c(blogs.size, news.size, twitter.size), 'Lines' = c(Blogs.Lines, News.Lines, Twitter.Lines), 'Words' = c(0, 0, 0), 'Characters' = c(CharLengthOfBlogsText, CharLengthOfNewsText,  CharLengthOfTwitterText))
-colnames(WordLineChar.df) <- c("Dataset", "Size (MB)", "Line Count", "Word Count", "Character Count")
+df <- data.frame('Dataset' = c("Blogs", "News", "Twitter"),'Sample Size (MB)' = c(blogs.size, news.size, twitter.size), 'Lines' = c(Blogs.Lines, News.Lines, Twitter.Lines), 'Words' = c(Blogs.Words, News.Words, Twitter.Words), 'Characters' = c(CharLengthOfBlogsText, CharLengthOfNewsText,  CharLengthOfTwitterText))
+
+colnames(df) <- c("Dataset", "Size (MB)", "Line Count", "Word Count", "Character Count")
 
 # Close file connections
 close(con1, con2, con3)
 ```
 ```{r WordLineChar Table, echo=FALSE, message=FALSE, warning=FALSE}
-kable(WordLineChar.df)
+kable(df)
 ```
 
 #### Data Sampling and Cleaning
@@ -104,13 +111,22 @@ s.Twitter.Lines <- length(SampledTwitterText)
 s.CharLengthOfBlogsText <- sum(nchar(SampledBlogsText))
 s.CharLengthOfNewsText <- sum(nchar(SampledNewsText))
 s.CharLengthOfTwitterText <- sum(nchar(SampledTwitterText))
+s.Blogs.Words <- sum(stri_count(SampledBlogsText, regex = "\\S+"))
+s.News.Words <- sum(stri_count(SampledNewsText, regex = "\\S+"))
+s.Twitter.Words <- sum(stri_count(SampledTwitterText, regex = "\\S+"))
 
-s.WordLineChar.df <- data.frame('Dataset' = c("Blogs", "News", "Twitter"), 'Sample Size (MB)' = c(s.blogs.size, s.news.size, s.twitter.size), 'Lines' = c(s.Blogs.Lines, s.News.Lines, s.Twitter.Lines), 'Words' = c(0, 0, 0), 'Characters' = c(s.CharLengthOfBlogsText, s.CharLengthOfNewsText,  s.CharLengthOfTwitterText))
-colnames(s.WordLineChar.df) <- c("Dataset", "Sample Size (MB)", "Line Count", "Word Count", "Character Count")
+s.df <- data.frame('Dataset' = c("Blogs", "News", "Twitter"), 'Sample Size (MB)' = c(s.blogs.size, s.news.size, s.twitter.size), 'Lines' = c(s.Blogs.Lines, s.News.Lines, s.Twitter.Lines), 'Words' = c(s.Blogs.Words, s.News.Words, s.Twitter.Words), 'Characters' = c(s.CharLengthOfBlogsText, s.CharLengthOfNewsText,  s.CharLengthOfTwitterText))
+
+colnames(s.df) <- c("Dataset", "Sample Size (MB)", "Line Count", "Word Count", "Character Count")
 ```
 ```{r Sampled WordLineChar Table, echo=FALSE, message=FALSE, warning=FALSE}
-kable(s.WordLineChar.df)
+kable(s.df)  
 ```
+```{r plots}
+s.df.long <- melt(s.df)
+line.subset <- subset(s.df.long, variable == "Line Count")
+```
+
 
 <center>![Step 2](step2.png)</center>
 ----------------------------------------------------------------------------------------
@@ -135,6 +151,9 @@ kable(s.WordLineChar.df)
 ----------------------------------------------------------------------------------------
 
 * Test algorithms for computation efficiency (speed) and accuracy  
+        1.  
+        2.  
+        3.  
 * Attempt at the implementation of an ANN (Artificial Neural Network)  
   
 
