@@ -1,4 +1,4 @@
-options(java.parameters = "-Xmx4g" )
+options(java.parameters = "-Xmx6144m" )
 library(RWeka)
 
 # Unigram
