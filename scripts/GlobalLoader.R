@@ -2,6 +2,7 @@ setwd("C://Users//Yanal Kashou//Data Science//Projects//R//DataScienceCapstone//
 
 # Variables
 load("FinalCorpus.RData")
+load("f.df.RData")
 
 # Sessions
 load("OneScriptToRuleThemAll.RData")

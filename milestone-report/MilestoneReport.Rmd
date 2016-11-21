@@ -30,142 +30,75 @@ library(stringi)
 This is the milestone report for the Coursera Data Science Capstone Project, in which we aim to implement an algorithm to predict the next word, given raw text data that needs to be cleaned and analysed.  
 The topic of our report is **NLP (Natural Language Processing)**.
 
-### Our Data
-#### Data Loading
-
 ----------------------------------------------------------------------------------------
+
+### Our Data
+#### Data Loading  
+
+We are required to load three large text files into the `R Workspace`, explore these files and clean them, before we begin with the processing of their content.  
+
+
 <center>![Step 1](step1.png)</center>
 
-```{r Data Loading, message=FALSE, warning=FALSE, include=FALSE}
-set.seed(0)
-setwd("C://Users//Yanal Kashou//Data Science//Projects//R//DataScienceCapstone//data//raw_data")
-
-con1 <- file("en_US.blogs.txt", "r") 
-con2 <- file("en_US.news.txt", "r")
-con3 <- file("en_US.twitter.txt", "r")
-
-RawBlogsText <- readLines(con1)
-RawNewsText <- readLines(con2)
-RawTwitterText <- readLines(con3)
-
-blogs.info <- file.info("en_US.blogs.txt")
-blogs.size <- blogs.info$size / 10^6
-news.info <- file.info("en_US.news.txt")
-news.size <- news.info$size / 10^6
-twitter.info <- file.info("en_US.twitter.txt")
-twitter.size <- twitter.info$size / 10^6
-Blogs.Lines <- length(RawBlogsText)
-News.Lines <- length(RawNewsText)
-Twitter.Lines <- length(RawTwitterText)
-CharLengthOfBlogsText <- sum(nchar(RawBlogsText))
-CharLengthOfNewsText <- sum(nchar(RawNewsText))
-CharLengthOfTwitterText <- sum(nchar(RawTwitterText))
-Blogs.Words <- sum(stri_count(RawBlogsText, regex = "\\S+"))
-News.Words <- sum(stri_count(RawNewsText, regex = "\\S+"))
-Twitter.Words <- sum(stri_count(RawTwitterText, regex = "\\S+"))
-
-df <- data.frame('Dataset' = c("Blogs", "News", "Twitter"),'Sample Size (MB)' = c(blogs.size, news.size, twitter.size), 'Lines' = c(Blogs.Lines, News.Lines, Twitter.Lines), 'Words' = c(Blogs.Words, News.Words, Twitter.Words), 'Characters' = c(CharLengthOfBlogsText, CharLengthOfNewsText,  CharLengthOfTwitterText))
-
-colnames(df) <- c("Dataset", "Size (MB)", "Line Count", "Word Count", "Character Count")
-
-# Close file connections
-close(con1, con2, con3)
-```
 ```{r WordLineChar Table, echo=FALSE, message=FALSE, warning=FALSE}
-kable(df)
+setwd("C://Users//Yanal Kashou//Data Science//Projects//R//DataScienceCapstone//cache")
+load("r.df.RData")
+kable(r.df)
 ```
 
 #### Data Sampling and Cleaning
 
 To make it easier for computation, we have to reduce the size of the data to an acceptable value, in this case we will take a random binomial sample of 15% of each dataset to work with, clean, analyze and visualize.  
 
-```{r, message=FALSE, warning=FALSE, include=FALSE}
-## Set working directory (processed_data)
-setwd("C://Users//Yanal Kashou//Data Science//Projects//R//DataScienceCapstone//data//processed_data")
+Outlined below are the pre-processing steps we walked through:
 
-# 15% Sampling
-SampledBlogsText <- RawBlogsText[rbinom(Blogs.Lines*.15, Blogs.Lines, .5)]
-SampledNewsText <- RawNewsText[rbinom(News.Lines*.15, News.Lines, .5)]
-SampledTwitterText <- RawTwitterText[rbinom(Twitter.Lines*.15, Twitter.Lines, .5)]
+<center>![Step 2](step2.png)</center>
 
-# Export sampled text to .txt files
-
-con4 <- file("sampled.blogs.txt")
-writeLines(SampledBlogsText, con4)
-con5 <- file("sampled.news.txt")
-writeLines(SampledNewsText, con5)
-con6 <- file("sampled.twitter.txt")
-writeLines(SampledTwitterText, con6)
-close(con4, con5, con6)
-
-# Table
-s.blogs.info <- file.info("sampled.blogs.txt")
-s.blogs.size <- s.blogs.info$size / 10^6
-s.news.info <- file.info("sampled.news.txt")
-s.news.size <- s.news.info$size / 10^6
-s.twitter.info <- file.info("sampled.twitter.txt")
-s.twitter.size <- s.twitter.info$size / 10^6
-s.Blogs.Lines <- length(SampledBlogsText)
-s.News.Lines <- length(SampledNewsText)
-s.Twitter.Lines <- length(SampledTwitterText)
-s.CharLengthOfBlogsText <- sum(nchar(SampledBlogsText))
-s.CharLengthOfNewsText <- sum(nchar(SampledNewsText))
-s.CharLengthOfTwitterText <- sum(nchar(SampledTwitterText))
-s.Blogs.Words <- sum(stri_count(SampledBlogsText, regex = "\\S+"))
-s.News.Words <- sum(stri_count(SampledNewsText, regex = "\\S+"))
-s.Twitter.Words <- sum(stri_count(SampledTwitterText, regex = "\\S+"))
-
-s.df <- data.frame('Dataset' = c("Blogs", "News", "Twitter"), 'Sample Size (MB)' = c(s.blogs.size, s.news.size, s.twitter.size), 'Lines' = c(s.Blogs.Lines, s.News.Lines, s.Twitter.Lines), 'Words' = c(s.Blogs.Words, s.News.Words, s.Twitter.Words), 'Characters' = c(s.CharLengthOfBlogsText, s.CharLengthOfNewsText,  s.CharLengthOfTwitterText))
-
-colnames(s.df) <- c("Dataset", "Sample Size (MB)", "Line Count", "Word Count", "Character Count")
-```
 ```{r Sampled WordLineChar Table, echo=FALSE, message=FALSE, warning=FALSE}
+setwd("C://Users//Yanal Kashou//Data Science//Projects//R//DataScienceCapstone//cache")
+load("s.df.RData")
 kable(s.df)  
 ```
-```{r plots}
+```{r plots, message=FALSE, warning=FALSE, include=FALSE}
 s.df.long <- melt(s.df)
 line.subset <- subset(s.df.long, variable == "Line Count")
 ```
+We used the `tm` package to perform these steps and we left the stemming procedure to be performed automatically as we created a **Document Feature Matrix** using the `quanteda` package for each document in the corpus. This was done because stemming using the `tm` package caused word content to be ruined and require a further process called `stemCompletion`.
 
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+setwd("C://Users//Yanal Kashou//Data Science//Projects//R//DataScienceCapstone//cache")
+load("f.df.RData")
+kable(f.df)
+```
 
-<center>![Step 2](step2.png)</center>
-----------------------------------------------------------------------------------------
-
-### Exploratory Analysis and Visualization  
-
-----------------------------------------------------------------------------------------
-                Plot: Character Count before Cleaning and after Cleaning
 ----------------------------------------------------------------------------------------
 
 ### N-Grams 
 We used `NGramTokenizer` from the `RWeka` package to find the most frequent **unigrams**, **bigrams**, **trigrams** and **fourgrams**; also to produce the values below:
 
-----------------------------------------------------------------------------------------
-<center>![Step 3](Rplot02.png)</center>
+<center>![Step 3](Step3.png)</center>  
+
+
+<center>![N-Grams Plot](Rplot02.png)</center>
 ----------------------------------------------------------------------------------------
 
 ### Further Plans  
 #### Algorithm
 
-----------------------------------------------------------------------------------------
 <center>![Step 4](step4.png)</center>
-----------------------------------------------------------------------------------------
-
 
 * Test algorithms for computation efficiency (speed) and accuracy  
-        1.  
-        2.  
-        3.  
 * Attempt at the implementation of an ANN (Artificial Neural Network)  
   
+----------------------------------------------------------------------------------------
 
 #### Data Product
   
-----------------------------------------------------------------------------------------
 <center>![Step 5](step5.png)</center>
-----------------------------------------------------------------------------------------
+
 * Deploy an app using the implemented algorithm to shinyapps.io
 
+----------------------------------------------------------------------------------------
 ### Source Code
 For access to my GitHub Repository associated with this project, please visit the URL below:  
 [Data Science Capstone](https://github.com/ykashou92/DataScienceCapstone) 

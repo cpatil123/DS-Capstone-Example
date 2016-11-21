@@ -4,6 +4,7 @@
 library(tm)
 library(quanteda)
 library(SnowballC)
+library(stringi)
 
 ##########################################################################################
 
@@ -40,7 +41,9 @@ Blogs.Words <- sum(stri_count(RawBlogsText, regex = "\\S+"))
 News.Words <- sum(stri_count(RawNewsText, regex = "\\S+"))
 Twitter.Words <- sum(stri_count(RawTwitterText, regex = "\\S+"))
 
-df <- data.frame('Size (MB)' = c(blogs.size, news.size, twitter.size), 'Lines' = c(Blogs.Lines, News.Lines, Twitter.Lines), 'Words' = c(Blogs.Words, News.Words, Twitter.Words), 'Characters' = c(CharLengthOfBlogsText, CharLengthOfNewsText,  CharLengthOfTwitterText), row.names = c('Blogs', 'News', 'Twitter'))
+r.df <- data.frame('Dataset' = c("Blogs", "News", "Twitter"),'Sample Size (MB)' = c(blogs.size, news.size, twitter.size), 'Lines' = c(Blogs.Lines, News.Lines, Twitter.Lines), 'Words' = c(Blogs.Words, News.Words, Twitter.Words), 'Characters' = c(CharLengthOfBlogsText, CharLengthOfNewsText,  CharLengthOfTwitterText))
+
+colnames(r.df) <- c("Dataset", "Size (MB)", "Line Count", "Word Count", "Character Count")
 
 # Close file connections
 close(con1, con2, con3)
@@ -124,17 +127,17 @@ CleanCorpus <- tm_map(CleanCorpus, removeWords, stopwords("english"))
 CleanCorpus <- tm_map(CleanCorpus, content_transformer(tolower))
 inspect(CleanCorpus)
 
-writeLines(as.character(CleanCorpus[[1]]), con="cleaned.twitter.txt")
-writeLines(as.character(CleanCorpus[[2]]), con="cleaned.blogs.txt")
-writeLines(as.character(CleanCorpus[[3]]), con="cleaned.news.txt")
+writeLines(as.character(CleanCorpus[[1]]), con="cleaned.blogs.txt")
+writeLines(as.character(CleanCorpus[[2]]), con="cleaned.news.txt")
+writeLines(as.character(CleanCorpus[[3]]), con="cleaned.twitter.txt")
 
 # Remove Profanity
 PoliteCorpus <- tm_map(CleanCorpus, removeWords, BannedWords)
 inspect(PoliteCorpus)
 
-writeLines(as.character(PoliteCorpus[[1]]), con="polite.twitter.txt")
-writeLines(as.character(PoliteCorpus[[2]]), con="polite.blogs.txt")
-writeLines(as.character(PoliteCorpus[[3]]), con="polite.news.txt")
+writeLines(as.character(PoliteCorpus[[1]]), con="polite.blogs.txt")
+writeLines(as.character(PoliteCorpus[[2]]), con="polite.news.txt")
+writeLines(as.character(PoliteCorpus[[3]]), con="polite.twitter.txt")
 
 # Create char length dataframe
 #"Post-Stemming" = c(21415989, 1564823, 17116878)
@@ -147,14 +150,19 @@ CharLengthDF
 # Final Corpus and export to txt
 FinalCorpus <- tm_map(PoliteCorpus, PlainTextDocument)
 
-writeLines(as.character(FinalCorpus[[1]]), con="final.twitter.txt")
-writeLines(as.character(FinalCorpus[[2]]), con="final.blogs.txt")
-writeLines(as.character(FinalCorpus[[3]]), con="final.news.txt")
+writeLines(as.character(FinalCorpus[[1]]), con="final.blogs.txt")
+writeLines(as.character(FinalCorpus[[2]]), con="final.news.txt")
+writeLines(as.character(FinalCorpus[[3]]), con="final.twitter.txt")
 
-FinalTwitterText <- readLines(con = "final.twitter.txt")
 FinalBlogsText <- readLines(con = "final.blogs.txt")
 FinalNewsText <- readLines(con = "final.news.txt")
+FinalTwitterText <- readLines(con = "final.twitter.txt")
 
+f.Blogs.Words <- sum(stri_count(FinalBlogsText, regex = "\\S+"))
+f.News.Words <- sum(stri_count(FinalNewsText, regex = "\\S+"))
+f.Twitter.Words <- sum(stri_count(FinalTwitterText, regex = "\\S+"))
+f.df <- data.frame('Dataset' = c("Blogs", "News", "Twitter"), 'Pre-cleaning' = c(s.Blogs.Words, s.News.Words, s.Twitter.Words), 'Post-cleaning' = c(f.Blogs.Words, f.News.Words, f.Twitter.Words), '% Difference' = c((s.Blogs.Words-f.Blogs.Words)/s.Blogs.Words*100, (s.News.Words-f.News.Words)/s.News.Words*100, (s.Twitter.Words-f.Twitter.Words)/s.Twitter.Words*100))
+colnames(f.df) <- c("Dataset", "Post-Sampling Word Count", "Post-Cleaning Word Count", "% Decrease")
 ##########################################################################################
 
 # [PENDING] Document Term Matrix
@@ -167,5 +175,8 @@ write.table(c(CharLengthDF), file = "CharLengthTable")
 
 setwd("C://Users//Yanal Kashou//Data Science//Projects//R//DataScienceCapstone//cache")
 
+save(r.df, file="r.df.RData")
+save(s.df, file="s.df.RData")
+save(f.df, file="f.df.RData")
 save(FinalCorpus, file="FinalCorpus.RData")
 save.image(file="OneScriptToRuleThemAll.RData")
