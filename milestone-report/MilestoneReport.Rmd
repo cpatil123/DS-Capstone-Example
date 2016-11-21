@@ -26,7 +26,7 @@ library(reshape2)
 library(stringi)
 ```
 
-# Project Overview
+### Project Overview
 This is the milestone report for the Coursera Data Science Capstone Project, in which we aim to implement an algorithm to predict the next word, given raw text data that needs to be cleaned and analysed.  
 The topic of our report is **NLP (Natural Language Processing)**.
 
@@ -165,3 +165,7 @@ We used `NGramTokenizer` from the `RWeka` package to find the most frequent **un
 <center>![Step 5](step5.png)</center>
 ----------------------------------------------------------------------------------------
 * Deploy an app using the implemented algorithm to shinyapps.io
+
+### Source Code
+For access to my GitHub Repository associated with this project, please visit the URL below:  
+[Data Science Capstone](https://github.com/ykashou92/DataScienceCapstone) 

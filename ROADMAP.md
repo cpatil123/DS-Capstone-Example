@@ -21,11 +21,20 @@
 - [x] Trim whitespace at the end of the word
 - [x] Remove profane words from original corpus
 
+## N-Grams
+- [x] Unigrams
+- [x] Bigrams
+- [x] Trigrams
+- [x] Fourgrams
+- [x] Grid Plot of N-Grams
+
 ## Milestone Report
 - [x] Change theme to Cerulean
 - [x] Segment report
 - [x] Include MindMup2.0 maps
-- [ ] Create word visualizations
+- [x] Create word visualizations
+- [ ] Create a simple Wordcloud
+- [ ] Consider Size vs Performance graph
 - [ ] Finish content write-up
 
 ## ML Prediction Algorithms
