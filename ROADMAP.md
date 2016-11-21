@@ -46,3 +46,7 @@
 - [ ] Prepare standard shinydashboard template
 - [ ] Create reactive text input field
 - [ ] Deploy app on shinyapps.io
+
+## Repository Cleaning
+- [ ] Remove unused `.RData` files
+- [ ] Remove all other unused files
