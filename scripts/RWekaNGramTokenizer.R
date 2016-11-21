@@ -26,8 +26,8 @@ plot.unigram <- subset(Unigram.wf, freq>= (Unigram.wf$freq[5])) %>%
         ggtitle("Unigrams (N=1)") +
         ylab("Frequency") + 
         theme(axis.text.x=element_text(angle=45, hjust=1),
-              axis.title.x=element_blank())
-
+              axis.title.x=element_blank(),
+              panel.background = element_blank())
 ###########################################################################################
 
 # Bigram
@@ -50,7 +50,8 @@ plot.bigram <- subset(Bigram.wf, freq>= (Bigram.wf$freq[5])) %>%
         ggtitle("Bigrams (N=2)") +
         ylab("Frequency") + 
         theme(axis.text.x=element_text(angle=45, hjust=1),
-              axis.title.x=element_blank())
+              axis.title.x=element_blank(),
+              panel.background = element_blank())
 
 ###########################################################################################
 
@@ -74,7 +75,8 @@ plot.trigram <- subset(Trigram.wf, freq>= (Trigram.wf$freq[5])) %>%
         ggtitle("Trigrams (N=3)") +
         ylab("Frequency") + 
         theme(axis.text.x=element_text(angle=45, hjust=1),
-              axis.title.x=element_blank())
+              axis.title.x=element_blank(),
+              panel.background = element_blank())
 
 ###########################################################################################
 
@@ -99,11 +101,14 @@ plot.fourgram <- subset(Fourgram.wf, freq>=(Fourgram.wf$freq[5])) %>%
         ggtitle("Fourgrams (N=4)") +
         ylab("Frequency") + 
         theme(axis.text.x=element_text(angle=45, hjust=1),
-              axis.title.x=element_blank())
+              axis.title.x=element_blank(),
+              panel.background = element_blank())
 
 ###########################################################################################
 plot.title = textGrob("Most Frequent N-Grams", gp=gpar(fontface="bold"))
-grid.arrange(plot.unigram, plot.bigram, plot.trigram, plot.fourgram, nrow= 2, top = plot.title)
+grid.arrange(plot.unigram, plot.bigram, plot.trigram, plot.fourgram, nrow = 2, top = plot.title)
+grid.arrange(plot.unigram, plot.bigram, nrow = 1, top = plot.title)
+grid.arrange(plot.trigram, plot.fourgram, nrow= 1) 
 
 g <- arrangeGrob(plot.unigram, plot.bigram, plot.trigram, plot.fourgram, nrow=2, top = plot.title) #generates g
 ggsave(file="n-grams.png", g)

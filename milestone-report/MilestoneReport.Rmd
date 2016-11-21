@@ -138,9 +138,10 @@ line.subset <- subset(s.df.long, variable == "Line Count")
 ----------------------------------------------------------------------------------------
 
 ### N-Grams 
+We used `NGramTokenizer` from the `RWeka` package to find the most frequent **unigrams**, **bigrams**, **trigrams** and **fourgrams**; also to produce the values below:
 
 ----------------------------------------------------------------------------------------
-<center>![Step 3](step3.png)</center>
+<center>![Step 3](Rplot02.png)</center>
 ----------------------------------------------------------------------------------------
 
 ### Further Plans  
@@ -149,6 +150,7 @@ line.subset <- subset(s.df.long, variable == "Line Count")
 ----------------------------------------------------------------------------------------
 <center>![Step 4](step4.png)</center>
 ----------------------------------------------------------------------------------------
+
 
 * Test algorithms for computation efficiency (speed) and accuracy  
         1.  
