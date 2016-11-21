@@ -5,6 +5,8 @@ library(tm)
 library(quanteda)
 library(SnowballC)
 
+##########################################################################################
+
 ### Set seed for reproducibility
 set.seed(0)
 
@@ -42,6 +44,8 @@ df <- data.frame('Size (MB)' = c(blogs.size, news.size, twitter.size), 'Lines' =
 
 # Close file connections
 close(con1, con2, con3)
+
+##########################################################################################
 
 ## Set working directory (processed_data)
 setwd("C://Users//Yanal Kashou//Data Science//Projects//R//DataScienceCapstone//data//processed_data")
@@ -84,6 +88,8 @@ s.Twitter.Words <- sum(stri_count(TokenizedTwitter, regex = "\\S+"))
 
 s.df <- data.frame('Dataset' = c("Blogs", "News", "Twitter"), 'Sample Size (MB)' = c(s.blogs.size, s.news.size, s.twitter.size), 'Lines' = c(s.Blogs.Lines, s.News.Lines, s.Twitter.Lines), 'Words' = c(s.Blogs.Words, s.News.Words, s.Twitter.Words), 'Characters' = c(s.CharLengthOfBlogsText, s.CharLengthOfNewsText,  s.CharLengthOfTwitterText))
 colnames(s.df) <- c("Dataset", "Sample Size (MB)", "Line Count", "Word Count", "Character Count")
+
+##########################################################################################
 
 ### Create Corpus 
 TextCorpus <- Corpus(DirSource(directory = getwd(), pattern="sampled.*.txt|sampled.*.txt"))
@@ -149,6 +155,7 @@ FinalTwitterText <- readLines(con = "final.twitter.txt")
 FinalBlogsText <- readLines(con = "final.blogs.txt")
 FinalNewsText <- readLines(con = "final.news.txt")
 
+##########################################################################################
 
 # [PENDING] Document Term Matrix
 #dfm(con = "polite.twitter.txt", ignoredFeatures = stopwords("english"), stem = TRUE)
