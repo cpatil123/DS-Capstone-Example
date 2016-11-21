@@ -1,5 +1,10 @@
+# Increase Java Memory Heap Size
 options(java.parameters = "-Xmx6144m" )
 library(RWeka)
+library(dplyr)
+library(grid)
+library(gridExtra)
+library(ggplot2)
 
 # Unigram
 UnigramTokenizer <- function(x) NGramTokenizer(x, Weka_control(min = 1, max = 1))
@@ -12,6 +17,16 @@ inspect(Unigram.stdm)
 Unigram.m <- as.matrix(Unigram.stdm)
 Unigram.f <- sort(rowSums(Unigram.m), decreasing=TRUE)
 head(Unigram.f, 5)
+
+Unigram.wf <- data.frame(word = names(Unigram.f), freq = Unigram.f)
+
+plot.unigram <- subset(Unigram.wf, freq>= (Unigram.wf$freq[5])) %>% 
+        ggplot(aes(word, freq)) +
+        geom_bar(stat="identity", fill="darkgreen") +
+        ggtitle("Unigrams (N=1)") +
+        ylab("Frequency") + 
+        theme(axis.text.x=element_text(angle=45, hjust=1),
+              axis.title.x=element_blank())
 
 ###########################################################################################
 
@@ -64,7 +79,7 @@ plot.trigram <- subset(Trigram.wf, freq>= (Trigram.wf$freq[5])) %>%
 ###########################################################################################
 
 # Fourgram +
-FourgramTokenizer <- function(x) NGramTokenizer(x, Weka_control(min = 4, max = Inf))
+FourgramTokenizer <- function(x) NGramTokenizer(x, Weka_control(min = 4, max = 4))
 Fourgram.tdm <- TermDocumentMatrix(FinalCorpus, control = list(tokenize = FourgramTokenizer))
 inspect(Fourgram.tdm[1:15,])
 Fourgram.stdm <- removeSparseTerms(Fourgram.tdm, 0.90)
