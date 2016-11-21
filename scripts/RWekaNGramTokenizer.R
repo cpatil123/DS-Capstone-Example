@@ -108,3 +108,5 @@ grid.arrange(plot.unigram, plot.bigram, plot.trigram, plot.fourgram, nrow= 2, to
 g <- arrangeGrob(plot.unigram, plot.bigram, plot.trigram, plot.fourgram, nrow=2, top = plot.title) #generates g
 ggsave(file="n-grams.png", g)
 
+setwd("C://Users//Yanal Kashou//Data Science//Projects//R//DataScienceCapstone//cache")
+save.image(file="RWekaNGramTokenizer.RData")

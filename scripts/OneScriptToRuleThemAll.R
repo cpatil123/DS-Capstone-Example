@@ -164,3 +164,8 @@ BlogsDFM <- dfm(FinalBlogsText, stem = TRUE)
 NewsDFM <- dfm(FinalTwitterText, stem = TRUE)
 
 write.table(c(CharLengthDF), file = "CharLengthTable")
+
+setwd("C://Users//Yanal Kashou//Data Science//Projects//R//DataScienceCapstone//cache")
+
+save(FinalCorpus, file="FinalCorpus.RData")
+save.image(file="OneScriptToRuleThemAll.RData")
