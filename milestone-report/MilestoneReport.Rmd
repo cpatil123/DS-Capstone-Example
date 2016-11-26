@@ -87,6 +87,7 @@ We used `NGramTokenizer` from the `RWeka` package to find the most frequent **un
 #### Considerations
 * The N-Grams frequency model produced is of our random sample of 15% of the dataset. If we performed another random sample, the most frequent words might change.  
 * If there is a way to create an N-Gram model of the entire dataset without sampling and without affecting app performance, this would be our best solution for high accuracy. Cannot be confirmed until further testing.  
+* We can use a classification algorithm to detect the N-Grams, and then predict accordingly.  
 
 #### Algorithm
 
@@ -112,7 +113,13 @@ __Deep Learning__
   
 <center>![Step 5](step5.png)</center>
 
-* Deploy an app using the implemented algorithm to shinyapps.io
+The concept is simple enough:
+
+* A text field that takes a string input, and observes an event where (space) is entered after a word.  
+* The observed event triggers the prediction algorithm, cancels immediately if the person continues typing.  
+* The algorithm results and/or confidence levels are displayed reactively.  
+* A bit of UI work can be beneficial for both the user and the developer. An attractive app is an app that more people will use.  
+* Deploy the application on [shinyapps.io](http://www.shinyapps.io/).
 
 ----------------------------------------------------------------------------------------
 ### Source Code
