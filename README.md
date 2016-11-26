@@ -6,12 +6,12 @@ This capstone project's aim is to delve into a previously unknown field within d
   
 ### Navigation
 #### Folders
-[__scripts__](https://github.com/ykashou92/DataSciPort/tree/master/script) Contains `.R` scripts used to load, clean, analyze and visualize the data.    
-[__cache__](https://github.com/ykashou92/DataSciPort/tree/master/cache) Contains cached `.RData` files.  
+[__scripts__](https://github.com/ykashou92/DataSciCapstone/tree/master/script) Contains `.R` scripts used to load, clean, analyze and visualize the data.    
+[__cache__](https://github.com/ykashou92/DataSciCapstone/tree/master/cache) Contains cached `.RData` files.  
 
 #### Files
-[__ROADMAP__](https://github.com/ykashou92/DataScienceCapstonet/blob/master/ROADMAP.md) Contains a checklist-style roadmap of the project.   
-[__LICENSE__](https://github.com/ykashou92/DataSciPort/blob/master/LICENSE) Contains clarification on terms of use.
+[__ROADMAP__](https://github.com/ykashou92/DataScienceCapstone/blob/master/ROADMAP.md) Contains a checklist-style roadmap of the project.   
+[__LICENSE__](https://github.com/ykashou92/DataSciCapstone/blob/master/LICENSE) Contains clarification on terms of use.
 
 
 ### Milestone Report  
