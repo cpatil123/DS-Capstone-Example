@@ -82,13 +82,29 @@ We used `NGramTokenizer` from the `RWeka` package to find the most frequent **un
 <center>![N-Grams Plot](Rplot02.png)</center>
 ----------------------------------------------------------------------------------------
 
-### Further Plans  
+### Further Plans
+
+#### Considerations
+* The N-Grams frequency model produced is of our random sample of 15% of the dataset. If we performed another random sample, the most frequent words might change.  
+* If there is a way to create an N-Gram model of the entire dataset without sampling and without affecting app performance, this would be our best solution for high accuracy. Cannot be confirmed until further testing.  
+
 #### Algorithm
 
-<center>![Step 4](step4.png)</center>
+<center>![Step 4](step4-2.png)</center>
 
-* Test algorithms for computation efficiency (speed) and accuracy  
-* Attempt at the implementation of an ANN (Artificial Neural Network)  
+__Machine Learning__  
+
+* Decision Tree logically must be the fastest algorithm to use if we are to grab the most frequent words of (N + 1) Grams. That essentially means that if a person enters a single word (N = 1), then the most probable next word is a Bigram (1 + 1). Subsequently if a person enters 2 words or 3 words, then we know the next word must come from Trigrams or Fourgrams respectively.  
+
+* SVMs are very efficient, accurate but slower than decision trees when implemented.  
+
+* randomForest is a great choice for accuracy, but we must select an optimal number of trees to balance accuracy and computational efficiency.  
+
+__Deep Learning__  
+
+* (ANNs) Artificial Neural Networks present a very different and difficult challange where we must come up with a mathematical model for the algorithm to be implemented. Two great solutions to NLP are (CNNs) Convolutional Neural Netwoks and (RNNs) Recurrent Neural Networks.  
+
+* We might attempt at the implementation of an ANN, however this will be left for later after the machine learning algorithms in the above section have been tested, timed and implemented.  
   
 ----------------------------------------------------------------------------------------
 
