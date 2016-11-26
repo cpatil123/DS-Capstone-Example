@@ -91,7 +91,7 @@ We used `NGramTokenizer` from the `RWeka` package to find the most frequent **un
 
 #### Algorithm
 
-<center>![Step 4](step4-2.png)</center>
+<center>![Step 4](step4.png)</center>
 
 __Machine Learning__  
 
