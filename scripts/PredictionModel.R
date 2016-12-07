@@ -27,7 +27,6 @@ tdm.list <- list(tdm_N1, tdm_N2, tdm_N3, tdm_N4, tdm_N5)
 
 # TEST LINES - Quiz 2 Questions
 testline1 <- "The guy in front of me just bought a pound of bacon, a bouquet, and a case of"
-test <- "a case of"
 testline2 <- "You're the reason why I smile everyday. Can you follow me please? It would mean the"
 testline3 <- "Hey sunshine, can you follow me and make me the"
 testline4 <- "Very early observations on the Bills game: Offense still struggling but the"
@@ -40,13 +39,12 @@ testline10 <- "If this isn't the cutest thing you've ever seen, then you must be
 
 testline.list <- list(testline1, testline2, testline3, testline4, testline5, testline6, testline7, testline8, testline9, testline10)
 
+NGramList <- list(Unigram.df, Bigram.df, Trigram.df, Fourgram.df)
 # Next Word Prediction using Backoff Algorithm (It works but it sucks. Inaccurate.)
-predict_Backoff(testline1, tdm.list)
-
+predict_Backoff(testline1, NGramList)
 
 # Save data cache
 save(Xcorpus, file="Xcorpus.RData")
 save.image(file="PredictionModel.RData")
 
 #
-pmatch(x, table, nomatch = NA_integer_, duplicates.ok = FALSE)

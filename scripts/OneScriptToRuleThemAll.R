@@ -123,7 +123,7 @@ inspect(TextCorpus)
 CleanCorpus <- tm_map(TextCorpus, removePunctuation)
 CleanCorpus <- tm_map(CleanCorpus, stripWhitespace)
 CleanCorpus <- tm_map(CleanCorpus, removeNumbers)
-CleanCorpus <- tm_map(CleanCorpus, removeWords, stopwords("english"))
+#CleanCorpus <- tm_map(CleanCorpus, removeWords, stopwords("english"))
 CleanCorpus <- tm_map(CleanCorpus, content_transformer(tolower))
 inspect(CleanCorpus)
 

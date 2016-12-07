@@ -38,6 +38,9 @@
 - [ ] Finish content write-up
 
 ## ML Prediction Algorithms
+- [ ] Build a 2-6 NGram Model
+- [ ] Define a function that converts input (testline) to lowercase before prediction
+- [ ] Choose a prediction model
 - [ ] Split into Training - Testing - Validation
 - [ ] Use RandomForest
 - [ ] Attempt to use NN

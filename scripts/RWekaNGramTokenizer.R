@@ -28,6 +28,7 @@ plot.unigram <- subset(Unigram.wf, freq>= (Unigram.wf$freq[5])) %>%
         theme(axis.text.x=element_text(angle=45, hjust=1),
               axis.title.x=element_blank(),
               panel.background = element_blank())
+Unigram.df <- as.data.frame(Unigram.m)
 ###########################################################################################
 
 # Bigram
@@ -52,7 +53,7 @@ plot.bigram <- subset(Bigram.wf, freq>= (Bigram.wf$freq[5])) %>%
         theme(axis.text.x=element_text(angle=45, hjust=1),
               axis.title.x=element_blank(),
               panel.background = element_blank())
-
+Bigram.df <- as.data.frame(Bigram.m)
 ###########################################################################################
 
 # Trigram
@@ -77,7 +78,7 @@ plot.trigram <- subset(Trigram.wf, freq>= (Trigram.wf$freq[5])) %>%
         theme(axis.text.x=element_text(angle=45, hjust=1),
               axis.title.x=element_blank(),
               panel.background = element_blank())
-
+Trigram.df <- as.data.frame(Trigram.m)
 ###########################################################################################
 
 # Fourgram +
@@ -103,7 +104,7 @@ plot.fourgram <- subset(Fourgram.wf, freq>=(Fourgram.wf$freq[5])) %>%
         theme(axis.text.x=element_text(angle=45, hjust=1),
               axis.title.x=element_blank(),
               panel.background = element_blank())
-
+Fourgram.df <- as.data.frame(Fourgram.m)
 ###########################################################################################
 plot.title = textGrob("Most Frequent N-Grams", gp=gpar(fontface="bold"))
 grid.arrange(plot.unigram, plot.bigram, plot.trigram, plot.fourgram, nrow = 2, top = plot.title)
