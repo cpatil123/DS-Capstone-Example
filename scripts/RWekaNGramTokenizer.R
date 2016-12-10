@@ -5,12 +5,13 @@ library(dplyr)
 library(grid)
 library(gridExtra)
 library(ggplot2)
+library(tm)
 
 # Unigram
 UnigramTokenizer <- function(x) NGramTokenizer(x, Weka_control(min = 1, max = 1))
 Unigram.tdm <- TermDocumentMatrix(FinalCorpus, control = list(tokenize = UnigramTokenizer))
 inspect(Unigram.tdm[100:110, ])
-Unigram.stdm <- removeSparseTerms(Unigram.tdm, 0.01)
+Unigram.stdm <- removeSparseTerms(Unigram.tdm, 0.1)
 inspect(Unigram.stdm)
 
 # Top 5 Most Frequent Unigrams
@@ -35,7 +36,7 @@ Unigram.df <- as.data.frame(Unigram.m)
 BigramTokenizer <- function(x) NGramTokenizer(x, Weka_control(min = 2, max = 2))
 Bigram.tdm <- TermDocumentMatrix(FinalCorpus, control = list(tokenize = BigramTokenizer))
 inspect(Bigram.tdm[100:110, ])
-Bigram.stdm <- removeSparseTerms(Bigram.tdm, 0.01)
+Bigram.stdm <- removeSparseTerms(Bigram.tdm, 0.1)
 inspect(Bigram.stdm)
 
 # Top 5 Most Frequent Bigrams
@@ -54,13 +55,22 @@ plot.bigram <- subset(Bigram.wf, freq>= (Bigram.wf$freq[5])) %>%
               axis.title.x=element_blank(),
               panel.background = element_blank())
 Bigram.df <- as.data.frame(Bigram.m)
+
+Bigram.df <- as.data.frame(Bigram.m)
+Bigram.df$Count <- rowSums(Bigram.df[1:3])
+Bigram.df <- setNames(cbind(rownames(Bigram.df), Bigram.df, row.names = NULL),
+                      c("Terms", "x", "x1", "x2", "Count"))
+NGram.2 <- Bigram.df[, !(colnames(Bigram.df) %in% c("x","x1","x2"))]
+head(NGram.2)
+
+save(NGram.2, file="NGram.2.RData")
 ###########################################################################################
 
 # Trigram
 TrigramTokenizer <- function(x) NGramTokenizer(x, Weka_control(min = 3, max = 3))
 Trigram.tdm <- TermDocumentMatrix(FinalCorpus, control = list(tokenize = TrigramTokenizer))
 inspect(Trigram.tdm[1:15,])
-Trigram.stdm <- removeSparseTerms(Trigram.tdm, 0.01)
+Trigram.stdm <- removeSparseTerms(Trigram.tdm, 0.1)
 inspect(Trigram.stdm)
 
 # Top 5 Most Frequent Trigrams
@@ -85,7 +95,7 @@ Trigram.df <- as.data.frame(Trigram.m)
 FourgramTokenizer <- function(x) NGramTokenizer(x, Weka_control(min = 4, max = 4))
 Fourgram.tdm <- TermDocumentMatrix(FinalCorpus, control = list(tokenize = FourgramTokenizer))
 inspect(Fourgram.tdm[1:15,])
-Fourgram.stdm <- removeSparseTerms(Fourgram.tdm, 0.90)
+Fourgram.stdm <- removeSparseTerms(Fourgram.tdm, 0.1)
 
 # Top 5 Most Frequent Fourgrams
 Fourgram.m <- as.matrix(Fourgram.stdm)
@@ -116,3 +126,5 @@ ggsave(file="n-grams.png", g)
 
 setwd("C://Users//Yanal Kashou//Data Science//Projects//R//DataScienceCapstone//cache")
 save.image(file="RWekaNGramTokenizer.RData")
+
+####################################################################################################################################################################################################################################

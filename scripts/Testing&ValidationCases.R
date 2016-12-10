@@ -20,6 +20,8 @@ test18 <- "Every inch of you is perfect from the bottom to the"
 test19 <- "I’m thankful my childhood was filled with imagination and bruises from playing"
 test20 <- "I like how the same people are in almost all of Adam Sandler's"
 
+test <- list(test01, test02, test03, test04, test05, test06, test07, test08, test09, test10, test11, test12, test13, test14, test15, test16, test17, test18, test19, test20)
+
 # Validate
 validation01 <- "beer"
 validation02 <- "world"
@@ -41,3 +43,5 @@ validation17 <-
 validation18 <-
 validation19 <-
 validation20 <-
+
+validation <- list(validation01, validation02, validation03, validation04, validation05, validation06, validation07, validation08, validation09, validation10, validation11, validation12, validation13, validation14, validation15, validation16, validation17, validation18, validation19, validation20) 
