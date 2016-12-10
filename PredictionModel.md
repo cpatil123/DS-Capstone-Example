@@ -1,13 +1,13 @@
 # Probability Table Generation and Next-Word Prediction
 
-The idea is very simple. There are a few steps involved in the creation of the algorithm, we can begin by:  
+__The idea is very simple. There are a few steps involved in the creation of the algorithm, we can begin by:__  
 
 - [ ] Creating N-Gram Models using `RWeka`'s `NGramTokenizer` Function from `N = 2`  
 to `N = 6`. Preferably a onetime operation using the entire cleaned dataset and not a `15%` sample. Then saved and loaded as a list of `.RData` files.
 - [ ] Combine all into one Data Frame  
 - [ ] We can now create a Frequency/Total Probability Column for each N-Gram  
   
-Then we can define the function:
+__Then we can define the function:__  
   
 - [ ] Takes a string of text.  
 - [ ] Lowercases it.  
