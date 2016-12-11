@@ -1,4 +1,4 @@
-# DataScienceCapstone
+# Data Science Capstone
 Repository for JHU Coursera Data Science Capstone Project  
 
 ### Description  
