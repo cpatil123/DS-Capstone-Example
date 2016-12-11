@@ -33,17 +33,12 @@
 - [x] Segment report
 - [x] Include MindMup2.0 maps
 - [x] Create word visualizations
-- [ ] Create a simple Wordcloud
-- [ ] Consider Size vs Performance graph
-- [ ] Finish content write-up
+- [x] Finish content write-up
 
 ## ML Prediction Algorithms
 - [ ] Build a 2-6 NGram Model
 - [ ] Define a function that converts input (testline) to lowercase before prediction
 - [ ] Choose a prediction model
-- [ ] Split into Training - Testing - Validation
-- [ ] Use RandomForest
-- [ ] Attempt to use NN
 
 ## Deployment with Shiny
 - [ ] Prepare standard shinydashboard template
