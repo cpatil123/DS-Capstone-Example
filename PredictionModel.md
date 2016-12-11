@@ -11,11 +11,10 @@ __The idea is very simple. There are a few steps involved in the creation of the
 __The general guidelines are as follows:__  
 - [x] Creating N-Gram Models using `RWeka`'s `NGramTokenizer` Function from `N = 2`  
 to `N = 6`. Preferably a one-time operation using the entire cleaned dataset and not a `15%` sample. Then saved and loaded as a list of `.RData` files.
-- [ ] Combine all into one Data Frame  
-- [ ] We can now create a Frequency/Total Probability Column for each N-Gram  
+- [x] Convert each `tdm` to a `data.frame`
+- [x] Create a Frequency/Total Probability Column for each N-Gram data.frame 
   
 __Then we can define the function:__  
-  
 - [ ] Takes a string of text.  
 - [ ] Lowercases it.  
 - [ ] Finds the number of words in the string  
