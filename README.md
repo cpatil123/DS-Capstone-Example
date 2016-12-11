@@ -10,7 +10,7 @@ This capstone project's aim is to delve into a previously unknown field within d
 [__cache__](https://github.com/ykashou92/DataScienceCapstone/tree/master/cache) Contains cached `.RData` files.  
 [__data__](https://github.com/ykashou92/DataScienceCapstone/tree/master/data) Contains raw and processed data.  
 [__milestone-report__](https://github.com/ykashou92/DataScienceCapstone/tree/master/milestone-report) Contains the milestone report and associated files.  
-[__prediction-model__](https://github.com/ykashou92/DataScienceCapstone/tree/master/prediction-model)
+[__prediction-model__](https://github.com/ykashou92/DataScienceCapstone/tree/master/prediction-model) Contains code in the form of `R` scripts and functions used to create the prediction model.   
 
 #### Files
 [__LICENSE__](https://github.com/ykashou92/DataScienceCapstone/blob/master/LICENSE) Contains clarification on terms of use.  
