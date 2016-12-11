@@ -1,9 +1,16 @@
 # Probability Table Generation and Next-Word Prediction
 
-__The idea is very simple. There are a few steps involved in the creation of the algorithm, we can begin by:__  
+__The idea is very simple. There are a few steps involved in the creation of the algorithm, we can begin by creating the following `.R` files:__  
 
+- [x] `DataLoading.R` : A script to load the data  
+- [x] `DataCleaning.R` : A script to clean the data  
+- [x] `NGramGenerate.R` : A script to generate Term Document Matrices based on N-Grams  
+- [x] `PredictionFunction.R` : A function that takes an input text and predicts an output  
+- [x] `ProbabilityDataFrame.R` : A script to generate a Probability Data Frame  
+
+__The general guidelines are as follows:__  
 - [ ] Creating N-Gram Models using `RWeka`'s `NGramTokenizer` Function from `N = 2`  
-to `N = 6`. Preferably a onetime operation using the entire cleaned dataset and not a `15%` sample. Then saved and loaded as a list of `.RData` files.
+to `N = 6`. Preferably a one-time operation using the entire cleaned dataset and not a `15%` sample. Then saved and loaded as a list of `.RData` files.
 - [ ] Combine all into one Data Frame  
 - [ ] We can now create a Frequency/Total Probability Column for each N-Gram  
   

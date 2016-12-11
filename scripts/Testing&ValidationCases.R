@@ -33,15 +33,15 @@ validation07 <- "time"
 validation08 <- "fingers"
 validation09 <- "bad"
 validation10 <- "insane"
-validation11 <-
-validation12 <-
-validation13 <-
-validation14 <-
-validation15 <-
-validation16 <-
-validation17 <-
-validation18 <-
-validation19 <-
-validation20 <-
+validation11 <- "die"
+validation12 <- "marital"
+validation13 <- "weekend"
+validation14 <- "stress"
+validation15 <- "picture"
+validation16 <- "matter"
+validation17 <- "hand"
+validation18 <- "top"
+validation19 <- "outside"
+validation20 <- "movies"
 
 validation <- list(validation01, validation02, validation03, validation04, validation05, validation06, validation07, validation08, validation09, validation10, validation11, validation12, validation13, validation14, validation15, validation16, validation17, validation18, validation19, validation20) 
