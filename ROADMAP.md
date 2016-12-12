@@ -16,7 +16,6 @@
 - [x] Remove stop words
 - [x] Remove numbers
 - [x] Remove whitespace
-- [x] Reduce to stemwords
 - [x] Download a profane dictionary / list of unwanted words
 - [x] Trim whitespace at the end of the word
 - [x] Remove profane words from original corpus
