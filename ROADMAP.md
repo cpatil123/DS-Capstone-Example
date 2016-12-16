@@ -36,7 +36,7 @@
 
 ## ML Prediction Algorithms
 - [x] Build a 2-6 NGram Model
-- [ ] Define a function that converts input (testline) to lowercase before prediction
+- [x] Define a function that converts input (testline) to lowercase before prediction
 
 ## Deployment with Shiny
 - [ ] Prepare standard shinydashboard template
