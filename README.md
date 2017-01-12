@@ -23,4 +23,4 @@ as **HTML**:
   
 ### App   
 URL:  
-  
+[WordXWord](https://ykashou92.shinyapps.io/dscapstone-nlp-app/)

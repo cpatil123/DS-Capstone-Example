@@ -5,6 +5,7 @@
 setwd("C://Users//Yanal Kashou//Data Science//Projects//R//DataScienceCapstone//cache")
 
 load("Raw.RData")
+library(dplyr)
 library(plyr)
 library(tm)
 library(RWeka)
@@ -22,6 +23,7 @@ SDPredictionFunction <- function(InputText) {
         
         f.convert(CorpusTDM)
         f.select(N.df)
+        #f.null(SelectText)
         f.predict(SelectText)
         
         print(Prediction)
@@ -29,17 +31,25 @@ SDPredictionFunction <- function(InputText) {
         proc.time() - ptm
 }
 ################################################################################
+# Clean the text from non-alphanumeric characters, keep last 5 words, if sentence is longer.
+
 f.clean <- function(InputText) {
         CleanText <<- tolower(InputText)
         CleanText <<- gsub("[^[:alnum:][:space:]]", "", CleanText)
         N <<- sapply(gregexpr("\\S+", CleanText), length)
+        
+        while (N > 5) {
+                CleanText <<- gsub("^\\s*\\w*", "", CleanText)
+                N <<- sapply(gregexpr("\\S+", CleanText), length)
+                CleanText <<- gsub("^\\s", "",CleanText)
+        }
 }
 ################################################################################
 f.grep <- function(CleanText) {
         Grep <<- grep(as.String(CleanText), Raw)
         grepped.df <<- data.frame()
         grepped.df <<- as.data.frame(Grep)
-        grepped.df <<- rename(grepped.df, grepID = Grep)
+        grepped.df <<- dplyr::rename(grepped.df, grepID = Grep)
 }
 ################################################################################
 f.corpus <- function(GrepText) {
@@ -57,7 +67,6 @@ f.N <- function(M) {
 ################################################################################
 f.convert <- function(CorpusTDM) {
         N.df <<- as.data.frame(as.matrix(CorpusTDM))
-        #N.df$Count <<- rowSums(N.df[1:3])
         N.df <<- setNames(cbind(rownames(N.df), N.df, row.names = NULL),
                 c("Terms", "Count"))
         N.df$Probability <<- N.df$Count/sum(N.df$Count)
@@ -66,24 +75,28 @@ f.convert <- function(CorpusTDM) {
 f.select <- function(N.df) {
         SelectText <<- N.df %>% 
                 filter(str_detect(Terms, CleanText))
-        if (is.null(SelectText)) {
-                # Delete first word from string
-                CleanText <<- gsub("^\\s*\\w*", "", CleanText)
-                SelectText <<- N.df %>% 
-                        filter(str_detect(Terms, CleanText))
-        }
-        if(is.null(SelectText)) {
-                # Delete first word from string again
-                CleanText <<- gsub("^\\s*\\w*", "", CleanText)
-                SelectText <<- N.df %>% 
-                        filter(str_detect(Terms, CleanText))
-        }
+        
         # Remove terms ending with the input
         a <- word(CleanText, -1)
         b <- word(SelectText$Terms,-1)
         SelectText <<- SelectText[-c(which(a == b)),]
         SelectText <<- SelectText[order(-SelectText$Probability),]
         
+}
+################################################################################
+f.null <- function(CleanText) {
+        repeat{
+                CleanText <<- gsub("^\\s*\\w*", "", CleanText)
+                N <<- sapply(gregexpr("\\S+", CleanText), length)
+                CleanText <<- gsub("^\\s", "",CleanText)
+                f.N(M)
+                f.convert(CorpusTDM)
+                SelectText <<- N.df %>% 
+                        filter(str_detect(Terms, CleanText))
+                if(nrow(SelectText) != 0){
+                        break
+                }
+        }
 }
 ################################################################################
 f.if <- function(SelectText) {
@@ -94,6 +107,9 @@ f.if <- function(SelectText) {
         }
         
 }
+
+
+
 ################################################################################
 f.predict <- function(SelectText) {
         PredictText <<- select(SelectText, Terms, Probability)

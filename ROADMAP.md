@@ -39,10 +39,19 @@
 - [x] Define a function that converts input (testline) to lowercase before prediction
 
 ## Deployment with Shiny
-- [ ] Prepare standard shinydashboard template
-- [ ] Create reactive text input field
-- [ ] Deploy app on shinyapps.io
-
+- [x] Prepare standard shinydashboard template
+- [x] Create reactive text input field
+- [x] Deploy alpha version of app on shinyapps.io (UI version)
+- [x] Create concept/rudimentary proc_time df and plot
+- [x] Implement both algorithms
+- [x] Deploy beta version of app (Working version)
+- [x] Overview tab writeup
+- [x] Complete UI.R
+- [x] Complete Server.R
+- [x] Complete Global.R
+- [x] Refine algorithms
+- [x] Deploy final version of app (Complete version)
+ 
 ## Repository Cleaning
-- [ ] Remove unused `.RData` files
-- [ ] Remove all other unused files
+- [x] Remove unused `.RData` files
+- [x] Remove all other unused files

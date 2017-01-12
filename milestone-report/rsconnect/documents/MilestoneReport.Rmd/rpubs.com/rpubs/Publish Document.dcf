@@ -1,0 +1,7 @@
+name: Publish Document
+account: rpubs
+server: rpubs.com
+appId: https://api.rpubs.com/api/v1/document/230666/c9f6f22e06894ef685e63139d170fb25
+bundleId: https://api.rpubs.com/api/v1/document/230666/c9f6f22e06894ef685e63139d170fb25
+url: http://rpubs.com/ykashou92/230666
+when: 1480258127.99059

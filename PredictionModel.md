@@ -74,7 +74,7 @@ __Then we can define the function:__
 - [x] Lowercases it.  
 - [x] Finds the number of words in the string  
 - [x] Based on the number of words, it assigns `N = Number of Words` for upto the last `N = 6` words in the string.  
-- [ ] Recursively and negatively iterates N only if no match occurs from the N-Gram Data Frame. Example: "I am here" is the string we input, we want to predict the last word "dad". So it assigns `N = 3` and searches the dataframe for a match from the `N = N + 1`, i.e `N = 3 + 1 = 4` column.   
-- [ ] If a possible partial match is available, it returns it and the probabilities assigned to the top 1-5 matches.  
-- [ ] If there is no match. It iterates down to `N = 2` and searches `N = 3` column for matches. So instead of using "I am here" to find "I am here dad", you use "am here" to find "am here dad".   
-- [ ] If there is no match. It iterates down even further to `N = 1` and searches `N = 2` column for matches. So instead of using "am here" to find "am here dad", you use "here" to find "here dad".   
+- [x] Recursively and negatively iterates N only if no match occurs from the N-Gram Data Frame. Example: "I am here" is the string we input, we want to predict the last word "dad". So it assigns `N = 3` and searches the dataframe for a match from the `N = N + 1`, i.e `N = 3 + 1 = 4` column.   
+- [x] If a possible partial match is available, it returns it and the probabilities assigned to the top 1-5 matches.  
+- [x] If there is no match. It iterates down to `N = 2` and searches `N = 3` column for matches. So instead of using "I am here" to find "I am here dad", you use "am here" to find "am here dad".   
+- [x] If there is no match. It iterates down even further to `N = 1` and searches `N = 2` column for matches. So instead of using "am here" to find "am here dad", you use "here" to find "here dad".   
